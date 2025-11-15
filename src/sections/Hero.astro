@@ -1,0 +1,69 @@
+---
+import ButtonReserve from "../components/ButtonReserve.astro";
+import IconPoint from "/public/icon-point.svg";
+import IconAir from "../assets//icons/icon-air.svg";
+---
+
+<main
+    id="hero"
+    class="px-2 text-white bg-no-repeat bg-cover bg-center h-screen w-full"
+>
+    <div
+        class="max-w-7xl h-full mx-auto flex flex-col justify-center items-center gap-2"
+    >
+        <div class="flex font-extralight gap-4 text-[1em]">
+            <div class="flex">
+                <IconPoint />
+                <span>Osaka</span>
+            </div>
+            <div class="flex">
+                <IconPoint />
+                <span>13 May 2026</span>
+            </div>
+        </div>
+        <h1
+            class="text-[2.9em] pt-2 text-center leading-13 sm:text-7xl sm:leading-15 md:text-8xl montserrat-italic-black"
+        >
+            Viaja a Japón
+        </h1>
+        <p
+            class="text-center text-[1em] p-2 font-light md:max-w-[75ch] sm:max-w-[55ch] sm:pt-5 md:pt-8"
+        >
+            Organiza tu viaje a Japón con expertos en turismo japonés. Ofrecemos
+            paquetes personalizados, rutas temáticas, asistencia en español y
+            recursos exclusivos para que tu experiencia sea inolvidable.
+        </p>
+        <ButtonReserve label="Reserva Ahora" />
+    </div>
+</main>
+<!-- bg-[url('/public/bg-japan.png')] -->
+
+<style>
+    #hero {
+        background: linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0.623),
+                rgba(0, 0, 0, 0.623)
+            ),
+            url("/public/bg-japan.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    #hero h1 {
+    }
+
+    /* .poppins-black-italic {
+        font-family: "Poppins", sans-serif;
+        font-weight: 900;
+        font-style: italic;
+    } */
+
+    .montserrat-italic-black {
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 900;
+        font-style: italic;
+    }
+</style>

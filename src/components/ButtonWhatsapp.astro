@@ -1,0 +1,30 @@
+---
+interface Props {
+    label: string;
+    href: string;
+    // icon?: any;
+}
+
+const { label } = Astro.props;
+const { href = "https://google.com" } = Astro.props;
+import IconW from "../assets/icons/iconWhatsapp.svg";
+---
+
+<a
+    class="buttonReserve w-fit px-6 py-3 rounded-4xl flex items-center gap-2 font-bold text-white"
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    title="Reserva un viaje Ahora"
+    aria-label="Abrir ejemplo.com en una nueva pestaña"
+>
+    <IconW />
+    <span>{label}</span>
+</a>
+
+<style>
+    .buttonReserve {
+        background: var(--gradient-primary);
+        /* background: linear-gradient(to left, red, green); */
+    }
+</style>

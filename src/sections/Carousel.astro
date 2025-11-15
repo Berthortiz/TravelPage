@@ -1,0 +1,41 @@
+---
+
+---
+
+<div
+  class="carousel w-[50%] h-28 mx-auto bg-[var(--color-primary)] flex overflow-hidden"
+>
+  <div class="sectionCarousel flex items-center gap-12">
+    <div class="itemCarousel">1</div>
+    <div class="itemCarousel">2</div>
+    <div class="itemCarousel">3</div>
+    <div class="itemCarousel">4</div>
+    <div class="itemCarousel">5</div>
+    <div class="itemCarousel">1</div>
+    <div class="itemCarousel">2</div>
+    <div class="itemCarousel">3</div>
+    <div class="itemCarousel">4</div>
+    <div class="itemCarousel">5</div>
+  </div>
+</div>
+
+<style>
+  .itemCarousel {
+    width: 50px;
+    height: 50px;
+    background: white;
+  }
+  .sectionCarousel {
+    /* animation: animecarosel 4s linear infinite; */
+  }
+
+  @keyframes animecarosel {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>

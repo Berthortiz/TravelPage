@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* Global font settings */
+* {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 400;
+    /* Regular weight by default */
+}
+
+@theme {
+    /* Font Families */
+    --font-family-poppins: Poppins, sans-serif;
+    --font-family-montserrat: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-family-protest-strike: 'Protest Strike', cursive, sans-serif;
+
+    /* Font Weights */
+    --font-weight-thin: 100;
+    --font-weight-extralight: 200;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+
+    /* Colors */
+    --color-primary: #FF6524;
+    --color-primary-variant-2: #FF4C35;
+    --color-paragraph: #646464;
+    --gradient-primary: linear-gradient(to left, var(--color-primary), var(--color-primary-variant-2));
+}
+
+/* ===== CUSTOM UTILITY CLASSES ===== */
+/* @layer utility {
+    .font-montserrat {
+        font-family: var(--font-family-montserrat);
+    }
+
+    .font-protest-strike {
+        font-family: var(--font-family-protest-strike);
+    }
+
+    .font-poppins {
+        font-family: var(--font-family-poppins);
+    }
+} */
