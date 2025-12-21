@@ -1,41 +1,69 @@
 ---
+// import { Image } from "@astrojs/image/components"; componenet para optimizar
 
+const logos = [
+  { name: "booking", src: "/img/logos-app/booking.svg", alt: "Booking" },
+  { name: "airbnb", src: "/img/logos-app/logo-airbnb.svg", alt: "Airbnb" },
+  { name: "expedia", src: "/img/logos-app/logo-expedia.svg", alt: "Expedia" },
+  { name: "orbitz", src: "/img/logos-app/logo-orbitz.svg", alt: "Orbitz" },
+  {
+    name: "tripavisor",
+    src: "/img/logos-app/logo-tripavisor.svg",
+    alt: "TripAdvisor",
+  },
+];
 ---
 
 <div
-  class="carousel w-[50%] h-28 mx-auto bg-[var(--color-primary)] flex overflow-hidden"
+  class="carousel flex-col mx-auto max-w-full py-3 px-8 bg-[var(--color-primary)] flex"
 >
-  <div class="sectionCarousel flex items-center gap-12">
-    <div class="itemCarousel">1</div>
-    <div class="itemCarousel">2</div>
-    <div class="itemCarousel">3</div>
-    <div class="itemCarousel">4</div>
-    <div class="itemCarousel">5</div>
-    <div class="itemCarousel">1</div>
-    <div class="itemCarousel">2</div>
-    <div class="itemCarousel">3</div>
-    <div class="itemCarousel">4</div>
-    <div class="itemCarousel">5</div>
+  <div class="mx-auto w-full overflow-hidden lg:max-w-6xl lg:px-14">
+    <p class="text-center text-2xl font-bold text-white">Búscanos en</p>
+
+    <!-- el w-fit es importante para la animación -->
+    <div class="sectionCarousel w-fit flex items-center">
+      {
+        [...logos, ...logos]?.map((logo) => {
+          return (
+            <div class="itemCarousel w-[200px] py-4 px-6 flex justify-center items-center lg:w-[250px]">
+              <img
+                width=""
+                class="w-full h-full  "
+                src={logo.src}
+                alt={logo.alt}
+              />
+            </div>
+          );
+        })
+      }
+    </div>
   </div>
 </div>
 
 <style>
-  .itemCarousel {
-    width: 50px;
-    height: 50px;
-    background: white;
-  }
   .sectionCarousel {
     /* animation: animecarosel 4s linear infinite; */
+    animation: carousel-scroll 9200ms linear infinite;
   }
-
-  @keyframes animecarosel {
+  @keyframes carousel-scroll {
     0% {
       transform: translateX(0);
     }
-
     100% {
       transform: translateX(-50%);
     }
   }
 </style>
+
+<!-- 
+
+  <div class="itemCarousel"><img src={logos[0].src} alt="" /></div>
+    <div class="itemCarousel">2</div>
+    <div class="itemCarousel">3</div>
+    <div class="itemCarousel">4</div>
+    <div class="itemCarousel">5</div>
+    <div class="itemCarousel"><img src={logos[0].src} alt="" /></div>
+    <div class="itemCarousel">2</div>
+    <div class="itemCarousel">3</div>
+    <div class="itemCarousel">4</div>
+    <div class="itemCarousel">5</div> -->
