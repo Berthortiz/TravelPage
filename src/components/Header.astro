@@ -1,23 +1,145 @@
 ---
-
+// Enlaces del menú (puedes personalizarlos)
+const links = [
+    { href: "/", label: "INICIO" },
+    { href: "/2024", label: "VIAJES" },
+    { href: "/combates", label: "CONTACTO" },
+];
 ---
 
 <header class="fixed text-orange-50 top-0 w-full px-6 py-4 z-20">
-    <div class="relative flex justify-between px-6 py-4 md:w-full">
-        <div><a href="#">Logo</a></div>
-        <nav class="hidden md:flex">
-            <a href="">Inicio</a>
-            <a href="">Servicos</a>
-            <a href="">Nosotros</a>
-            <a href="">Contacto</a>
+    <div class="relative flex justify-between px-6 py-4 md:w-full items-center">
+        <div><a href="/" class="font-bold">Logo</a></div>
+
+        <!-- Desktop nav -->
+        <nav
+            class="hidden md:flex gap-6 items-center"
+            role="navigation"
+            aria-label="Principal"
+        >
+            {
+                links.map((link) => (
+                    <a class="uppercase text-sm" href={link.href}>
+                        {link.label}
+                    </a>
+                ))
+            }
         </nav>
-        <button class="hidden md:flex">Cotizar</button>
-        <button id="icon-nav" class="md:hidden">
-            <img src="/public/icon-nav.svg" alt="" />
+
+        <button class="hidden md:inline-flex">Cotizar</button>
+
+        <!-- Botón hamburguesa -->
+        <button
+            id="icon-nav"
+            type="button"
+            class="md:hidden p-2"
+            title="Abrir menú"
+        >
+            <!-- Icono abrir (hamburguesa) -->
+            <svg
+                id="icon-open"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="text-orange-50"
+            >
+                <path
+                    d="M4 6h16M4 12h16M4 18h16"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+            </svg>
+            <!-- Icono cerrar -->
+            <svg
+                id="icon-close"
+                class="hidden"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="text-orange-50"
+            >
+                <path
+                    d="M6 6l12 12M6 18L18 6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+            </svg>
         </button>
     </div>
-    <div class="hidden"><h2>menu movil</h2></div>
+
+    <!-- Mobile menu (oculto por defecto; se mostrará cuando tenga la clase open) -->
+    <nav
+        id="mobile-menu"
+        class="hidden md:hidden absolute top-full left-0 right-0 bg-slate-800 flex-col p-6 gap-4 z-10"
+        role="navigation"
+        aria-label="Menú móvil"
+    >
+        {
+            links.map((link) => (
+                <a class="text-orange-50 block" href={link.href}>
+                    {link.label}
+                </a>
+            ))
+        }
+        <button class="mt-2 bg-orange-500 text-white py-2 px-4 rounded w-full"
+            >Cotizar</button
+        >
+    </nav>
 </header>
+
+<script type="module">
+    const btnMovil = document.getElementById("icon-nav");
+    const menu = document.getElementById("mobile-menu");
+    const iconOpen = document.getElementById("icon-open");
+    const iconClose = document.getElementById("icon-close");
+
+    if (btnMovil && menu) {
+        // setMenu(true) abre, setMenu(false) cierra. Lógica simple y sin parámetros complicados.
+        const setMenu = (open) => {
+            menu.classList.toggle("open", open);
+            if (iconOpen && iconClose) {
+                iconOpen.classList.toggle("hidden", open);
+                iconClose.classList.toggle("hidden", !open);
+            }
+        };
+
+        // Alternar al clicar el botón
+        btnMovil.addEventListener("click", () =>
+            setMenu(!menu.classList.contains("open")),
+        );
+
+        // Cerrar al clicar un enlace (útil en móvil)
+        menu.querySelectorAll("a").forEach((a) =>
+            a.addEventListener("click", () => setMenu(false)),
+        );
+
+        // Cerrar con Escape
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") setMenu(false);
+        });
+
+        // Cerrar al clicar fuera del menú
+        document.addEventListener("click", (e) => {
+            if (!menu.classList.contains("open")) return;
+            const target = e.target;
+            if (!menu.contains(target) && !btnMovil.contains(target))
+                setMenu(false);
+        });
+
+        // Cerrar automáticamente si se redimensiona a vista de escritorio (>= 768px)
+        window.addEventListener("resize", () => {
+            if (window.innerWidth >= 768 && menu.classList.contains("open")) {
+                setMenu(false);
+            }
+        });
+    }
+</script>
 
 <style is:global>
     .open {
