@@ -35,7 +35,7 @@ const links = [
             class="md:hidden p-2"
             title="Abrir menú"
         >
-            <!-- Icono abrir (hamburguesa) -->
+            <!-- Icono abrir  -->
             <svg
                 id="icon-open"
                 width="24"
@@ -73,7 +73,7 @@ const links = [
         </button>
     </div>
 
-    <!-- Mobile menu (oculto por defecto; se mostrará cuando tenga la clase open) -->
+    <!-- Mobile menu  -->
     <nav
         id="mobile-menu"
         class="hidden md:hidden absolute top-full left-0 right-0 bg-slate-800 flex-col p-6 gap-4 z-10"
@@ -100,7 +100,6 @@ const links = [
     const iconClose = document.getElementById("icon-close");
 
     if (btnMovil && menu) {
-        // setMenu(true) abre, setMenu(false) cierra. Lógica simple y sin parámetros complicados.
         const setMenu = (open) => {
             menu.classList.toggle("open", open);
             if (iconOpen && iconClose) {
@@ -114,12 +113,11 @@ const links = [
             setMenu(!menu.classList.contains("open")),
         );
 
-        // Cerrar al clicar un enlace (útil en móvil)
+        // Cerrar al clicar un enlace
         menu.querySelectorAll("a").forEach((a) =>
             a.addEventListener("click", () => setMenu(false)),
         );
 
-        // Cerrar con Escape
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") setMenu(false);
         });
@@ -132,7 +130,6 @@ const links = [
                 setMenu(false);
         });
 
-        // Cerrar automáticamente si se redimensiona a vista de escritorio (>= 768px)
         window.addEventListener("resize", () => {
             if (window.innerWidth >= 768 && menu.classList.contains("open")) {
                 setMenu(false);
