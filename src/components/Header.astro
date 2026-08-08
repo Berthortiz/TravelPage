@@ -1,49 +1,66 @@
 ---
-// Enlaces del menú (puedes personalizarlos)
+import ButtonPrimary from "./ButtonPrimary.astro";
+
+const logo = "/logo-1.svg";
+
 const links = [
-    { href: "/", label: "INICIO" },
-    { href: "/2024", label: "VIAJES" },
-    { href: "/combates", label: "CONTACTO" },
+    { href: "/", label: "Inicio" },
+    { href: "#proyects", label: "Portafolio" },
+    { href: "#AboutSecticon", label: "Sobre Mi" },
+    {
+        href: "https://www.paypal.com/ncp/payment/R2QJS8AAF58S2",
+        label: "PayPal",
+    },
 ];
 ---
 
-<header class="fixed text-orange-50 top-0 w-full px-6 py-4 z-20">
-    <div class="relative flex justify-between px-6 py-4 md:w-full items-center">
-        <div><a href="/" class="font-bold">Logo</a></div>
+<header class="fixed w-full z-50 bg-amber-950/70">
+    <div
+        class="flex lg:max-w-7xl justify-between mx-auto px-6 py-6 md:w-full items-center"
+    >
+        <div>
+            <a href="/" class="font-bold">
+                <img class="w-10" src={logo} alt="logo" />
+            </a>
+        </div>
 
-        <!-- Desktop nav -->
         <nav
-            class="hidden md:flex gap-6 items-center"
+            class="hidden md:flex gap-6 items-center text-blue-50"
             role="navigation"
             aria-label="Principal"
         >
             {
                 links.map((link) => (
-                    <a class="uppercase text-sm" href={link.href}>
+                    <a
+                        class="text-[1.1em] hover:text-white transition-colors"
+                        href={link.href}
+                    >
                         {link.label}
                     </a>
                 ))
             }
         </nav>
 
-        <button class="hidden md:inline-flex">Cotizar</button>
+        <ButtonPrimary
+            title="Contacto"
+            link="https://wa.link/bqgy6d"
+            additionalClass="hidden md:block px-4 py-1 text-(--color-secundary)"
+        />
 
-        <!-- Botón hamburguesa -->
         <button
             id="icon-nav"
             type="button"
-            class="md:hidden p-2"
+            class="md:hidden p-2 flex items-center z-20"
             title="Abrir menú"
         >
-            <!-- Icono abrir  -->
             <svg
                 id="icon-open"
-                width="24"
-                height="24"
+                width="40"
+                height="40"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                class="text-orange-50"
+                class="text-white"
             >
                 <path
                     d="M4 6h16M4 12h16M4 18h16"
@@ -52,94 +69,214 @@ const links = [
                     stroke-linecap="round"
                     stroke-linejoin="round"></path>
             </svg>
-            <!-- Icono cerrar -->
-            <svg
-                id="icon-close"
-                class="hidden"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="text-orange-50"
-            >
-                <path
-                    d="M6 6l12 12M6 18L18 6"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-            </svg>
         </button>
     </div>
 
-    <!-- Mobile menu  -->
     <nav
         id="mobile-menu"
-        class="hidden md:hidden absolute top-full left-0 right-0 bg-slate-800 flex-col p-6 gap-4 z-10"
+        class="w-full h-dvh flex fixed inset-0 bg-slate-900/80 backdrop-blur-2xl flex-col p-6 gap-6 z-50 overflow-y-auto"
         role="navigation"
         aria-label="Menú móvil"
     >
-        {
-            links.map((link) => (
-                <a class="text-orange-50 block" href={link.href}>
-                    {link.label}
-                </a>
-            ))
-        }
-        <button class="mt-2 bg-orange-500 text-white py-2 px-4 rounded w-full"
-            >Cotizar</button
-        >
-    </nav>
-</header>
+        <div class="flex justify-between items-center w-full">
+            <a href="/" class="font-bold">
+                <img class="w-10" src={logo} alt="logo" />
+            </a>
 
-<script type="module">
-    const btnMovil = document.getElementById("icon-nav");
-    const menu = document.getElementById("mobile-menu");
-    const iconOpen = document.getElementById("icon-open");
-    const iconClose = document.getElementById("icon-close");
+            <button
+                id="btn-close"
+                type="button"
+                class="p-2 flex items-center focus:outline-none"
+                title="Cerrar menú"
+            >
+                <svg
+                    id="icon-close"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="text-white"
+                >
+                    <path
+                        d="M6 6l12 12M6 18L18 6"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </svg>
+            </button>
+        </div>
 
-    if (btnMovil && menu) {
-        const setMenu = (open) => {
-            menu.classList.toggle("open", open);
-            if (iconOpen && iconClose) {
-                iconOpen.classList.toggle("hidden", open);
-                iconClose.classList.toggle("hidden", !open);
+        <div class="flex flex-col items-center gap-6 text-center mt-8 text-xl">
+            {
+                links.map((link) => (
+                    <a
+                        class="text-blue-50 w-full block py-3 border-b border-slate-800/60"
+                        href={link.href}
+                    >
+                        {link.label}
+                    </a>
+                ))
             }
+
+            <ButtonPrimary
+                title="Contacto"
+                link="https://wa.link/bqgy6d"
+                additionalClass="px-3 py-2 text-(--color-secundary) text-center block mt-4"
+            />
+            <div
+                class="text-white font-bold flex flex-wrap justify-center gap-4.5"
+            >
+                <p class="w-full">Redes Sociales</p>
+
+                <a
+                    href="https://youtube.com/@berthortiz?si=BBZQJ3pbdA6iKWga"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Canal de YouTube de Berth Ortiz"
+                    title="Ir al canal de YouTube - Berth Ortiz"
+                    class="-mt-0.5"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        class="w-9 h-9 fill-current text-white"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M23.498 6.186a2.997 2.997 0 0 0-2.11-2.123C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.388.563a2.997 2.997 0 0 0-2.11 2.123A31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .502 5.814 2.997 2.997 0 0 0 2.11 2.123C4.495 20.5 12 20.5 12 20.5s7.505 0 9.388-.563a2.997 2.997 0 0 0 2.11-2.123A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.502-5.814ZM9.75 15.568V8.432L15.5 12l-5.75 3.568Z"
+                        ></path>
+                    </svg>
+                </a>
+
+                <a
+                    href="https://www.instagram.com/berth_ortiz/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Perfil de Instagram de Berth Ortiz"
+                    title="Ir al perfil de Instagram - Berth Ortiz"
+                    class=""
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        class="w-8 h-8 fill-current text-white"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M7.03 2h9.94A5.03 5.03 0 0 1 22 7.03v9.94A5.03 5.03 0 0 1 16.97 22H7.03A5.03 5.03 0 0 1 2 16.97V7.03A5.03 5.03 0 0 1 7.03 2Zm0 2A3.03 3.03 0 0 0 4 7.03v9.94A3.03 3.03 0 0 0 7.03 20h9.94A3.03 3.03 0 0 0 20 16.97V7.03A3.03 3.03 0 0 0 16.97 4H7.03Zm9.84 1.43a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+                        ></path>
+                    </svg>
+                </a>
+
+                <a
+                    href="https://wa.link/bqgy6d"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Enlace de WhatsApp"
+                    title="Ir a WhatsApp"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        class="w-8 h-8 fill-current text-white -mt-0.4 -ml-0.5"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.174.198-.297.297-.495.099-.198.05-.372-.025-.521-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.521.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.073.149.198 2.096 3.2 5.077 4.487.709.306 1.262.49 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.174-1.413-.074-.123-.272-.198-.57-.347Z"
+                        ></path>
+                    </svg>
+                </a>
+
+                <!--  -->
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        const btnOpen = document.getElementById("icon-nav");
+        const btnClose = document.getElementById("btn-close");
+        const menu = document.getElementById("mobile-menu");
+
+        const scrollbarWidth = () => {
+            const scrollWidth =
+                window.innerWidth - document.documentElement.clientWidth;
+
+            document.documentElement.style.setProperty(
+                "--scrollbar-width",
+                `${scrollWidth}px`,
+            );
+
+            console.log(scrollWidth);
         };
 
-        // Alternar al clicar el botón
-        btnMovil.addEventListener("click", () =>
-            setMenu(!menu.classList.contains("open")),
-        );
+        scrollbarWidth();
+        if (btnOpen && btnClose && menu) {
+            const setMenu = (open: boolean | undefined) => {
+                const $body = document.body;
+                menu.classList.toggle("open", open);
 
-        // Cerrar al clicar un enlace
-        menu.querySelectorAll("a").forEach((a) =>
-            a.addEventListener("click", () => setMenu(false)),
-        );
+                if (menu.classList.contains("open")) {
+                    $body?.classList.add("no-scrolling");
+                }
+                if (!menu.classList.contains("open")) {
+                    $body?.classList.remove("no-scrolling");
+                }
 
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") setMenu(false);
-        });
+                // document.body.style.overflow = open ? "hidden" : "";
+            };
 
-        // Cerrar al clicar fuera del menú
-        document.addEventListener("click", (e) => {
-            if (!menu.classList.contains("open")) return;
-            const target = e.target;
-            if (!menu.contains(target) && !btnMovil.contains(target))
-                setMenu(false);
-        });
+            btnOpen.addEventListener("click", () => setMenu(true));
 
-        window.addEventListener("resize", () => {
-            if (window.innerWidth >= 768 && menu.classList.contains("open")) {
-                setMenu(false);
-            }
-        });
-    }
-</script>
+            btnClose.addEventListener("click", () => setMenu(false));
 
-<style is:global>
-    .open {
-        display: flex;
-    }
-</style>
+            menu.querySelectorAll("a").forEach((a) =>
+                a.addEventListener("click", () => setMenu(false)),
+            );
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") setMenu(false);
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!menu.classList.contains("open")) return;
+                const target = e.target as Node;
+
+                if (!menu.contains(target) && !btnOpen.contains(target)) {
+                    setMenu(false);
+                }
+            });
+
+            window.addEventListener("resize", () => {
+                if (
+                    window.innerWidth >= 768 &&
+                    menu.classList.contains("open")
+                ) {
+                    setMenu(false);
+                }
+            });
+        }
+    </script>
+
+    <style>
+        .header-position {
+            position: relative;
+        }
+    </style>
+    <style is:global>
+        .no-scrolling {
+            /* scrollbar-gutter: stable; */
+            overflow: hidden;
+            padding-right: var(--scrollbar-width);
+        }
+        #mobile-menu {
+            transform: translateX(-100%);
+            transition: all 0.4s ease-out;
+        }
+        .open {
+            transform: translateX(0) !important;
+            overflow: visible;
+        }
+    </style>
+</header>
