@@ -82,47 +82,47 @@ import { Icon } from "astro-icon/components";
 </style>
 
 <script>
-    import { gsap } from "gsap";
+    // import { gsap } from "gsap";
 
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    // import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-    gsap.registerPlugin(ScrollTrigger);
-    console.log(gsap.version);
+    // gsap.registerPlugin(ScrollTrigger);
+    // console.log(gsap.version);
 
-    function animateHero() {
-        const $titleHero = document.getElementById("Travel-title-hero");
-        const tl = gsap.timeline({
-            ease: "back.out()",
-        });
-        tl.fromTo(
-            $titleHero,
-            { autoAlpha: 0, scale: 0.8 },
-            {
-                duration: 0.7,
-                autoAlpha: 1,
-                scale: 1,
-                delay: 0.4,
-            },
-        )
-            .fromTo(
-                "#hero-description-travel, .btn-reserve, #priceTravel",
-                { autoAlpha: 0 },
-                { autoAlpha: 1, duration: 0.6, stagger: 0.15 },
-            )
-            .to(".hero-overlay", { opacity: 0.5 }, 0.1);
-    }
-
-    // .to("#hero-description-travel", {
-    //         duration: 1,
-    //         autoAlpha: 1,
-    //     }, "-=0.5");
+    // function animateHero() {
+    //     const $titleHero = document.getElementById("Travel-title-hero");
+    //     const tl = gsap.timeline({
+    //         ease: "back.out()",
+    //     });
+    //     tl.fromTo(
+    //         $titleHero,
+    //         { autoAlpha: 0, scale: 0.8 },
+    //         {
+    //             duration: 0.7,
+    //             autoAlpha: 1,
+    //             scale: 1,
+    //             delay: 0.4,
+    //         },
+    //     )
+    //         .fromTo(
+    //             "#hero-description-travel, .btn-reserve, #priceTravel",
+    //             { autoAlpha: 0 },
+    //             { autoAlpha: 1, duration: 0.6, stagger: 0.15 },
+    //         )
+    //         .to(".hero-overlay", { opacity: 0.5 }, 0.1);
     // }
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", animateHero, {
-            once: true,
-        });
-    } else {
-        animateHero();
-    }
+    // // .to("#hero-description-travel", {
+    // //         duration: 1,
+    // //         autoAlpha: 1,
+    // //     }, "-=0.5");
+    // // }
+
+    // if (document.readyState === "loading") {
+    //     document.addEventListener("DOMContentLoaded", animateHero, {
+    //         once: true,
+    //     });
+    // } else {
+    //     animateHero();
+    // }
 </script>

@@ -5,12 +5,8 @@ const logo = "/logo-1.svg";
 
 const links = [
     { href: "/", label: "Inicio" },
-    { href: "#proyects", label: "Portafolio" },
-    { href: "#AboutSecticon", label: "Sobre Mi" },
-    {
-        href: "https://www.paypal.com/ncp/payment/R2QJS8AAF58S2",
-        label: "PayPal",
-    },
+    { href: "#proyects", label: "Viajes" },
+    { href: "#testimonios-travel", label: "Testimonios" },
 ];
 ---
 
@@ -87,7 +83,7 @@ const links = [
 
     <nav
         id="mobile-menu"
-        class="w-full h-dvh flex fixed inset-0 bg-slate-900/80 backdrop-blur-2xl flex-col p-6 gap-6 z-50 overflow-y-auto"
+        class="w-full h-dvh flex fixed inset-0 bg-[#ff6524] backdrop-blur-2xl flex-col p-6 gap-6 z-50 overflow-y-auto"
         role="navigation"
         aria-label="Menú móvil"
     >
@@ -135,7 +131,7 @@ const links = [
             {
                 links.map((link) => (
                     <a
-                        class="text-blue-50 w-full block py-3 border-b border-slate-800/60"
+                        class="text-blue-50 w-full block py-3 border-b border-"
                         href={link.href}
                     >
                         {link.label}
@@ -146,7 +142,7 @@ const links = [
             <ButtonPrimary
                 title="Contacto"
                 link="https://wa.link/bqgy6d"
-                additionalClass="px-3 py-2 text-(--color-secundary) text-center block mt-4"
+                additionalClass="px-3 py-2 text-white border text-center block mt-4"
             />
             <div
                 class="text-white font-bold flex flex-wrap justify-center gap-4.5"
@@ -308,6 +304,17 @@ const links = [
         #header-travel {
             height: 80px;
         }
+        @media (max-width: 767px) {
+            #header-travel {
+                background-color: transparent !important;
+            }
+            #header-travel.is-iconic-cities-active {
+                background-color: #ff6524 !important;
+            }
+            #header-travel {
+                height: 60px;
+            }
+        }
         #travel-pc {
         }
     </style>
@@ -318,16 +325,6 @@ const links = [
         gsap.registerPlugin(ScrollTrigger);
 
         function animateHeader() {
-            const tl = gsap.timeline({
-                duration: 1,
-            });
-
-            tl.fromTo(
-                "#header-travel",
-                { autoAlpha: 0 },
-                { autoAlpha: 1, duration: 1 },
-            );
-
             const tlHeader = gsap.timeline({
                 ease: "power1.out",
                 // ease: "back.out(1.7)",
@@ -359,10 +356,24 @@ const links = [
                 trigger: "#seccionIconicCities",
                 markers: true,
                 start: "top top",
-                onEnter: () =>
-                    gsap.set(".text-nav-custom", { color: "#ff6524" }),
-                onLeaveBack: () =>
-                    gsap.set(".text-nav-custom", { color: "#ffffff" }),
+                onEnter: () => {
+                    gsap.set(".text-nav-custom", { color: "#ff6524" });
+                    document
+                        .querySelector("#header-travel")
+                        ?.classList.add("is-iconic-cities-active");
+                },
+                onEnterBack: () => {
+                    gsap.set(".text-nav-custom", { color: "#ff6524" });
+                    document
+                        .querySelector("#header-travel")
+                        ?.classList.add("is-iconic-cities-active");
+                },
+                onLeaveBack: () => {
+                    gsap.set(".text-nav-custom", { color: "#ffffff" });
+                    document
+                        .querySelector("#header-travel")
+                        ?.classList.remove("is-iconic-cities-active");
+                },
             });
         }
 

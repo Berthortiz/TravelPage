@@ -50,6 +50,10 @@ const cities = [
     }
 </div>
 <style>
+    #iconic-pictures {
+        pointer-events: none;
+    }
+
     #iconic-pictures img {
         width: 100%;
         height: 100%;
@@ -76,6 +80,7 @@ const cities = [
     .labelCitis {
         /* transform: translateY(100%); */
         color: #fff;
+        pointer-events: auto;
 
         text-shadow:
             /* 4px 4px 0px #fff, */
@@ -157,6 +162,11 @@ const cities = [
 
                 const cityCards =
                     gsap.utils.toArray<HTMLElement>('[data-animate="2"]');
+                const setHeaderIconicState = (active: boolean) => {
+                    document
+                        .querySelector("#header-travel")
+                        ?.classList.toggle("is-iconic-cities-active", active);
+                };
 
                 cityCards.forEach((card, index) => {
                     const img = card.querySelector("img");
@@ -164,6 +174,7 @@ const cities = [
                     if (index === 0) {
                         tl.set(".text-nav-custom", { color: "#ffffff" });
                     }
+                    const cardStart = tl.duration();
                     // if (index === cityCards.length - 1) {
                     //     tl.to(img, {
                     //         autoAlpha: 0,
@@ -171,11 +182,13 @@ const cities = [
                     // }
                     tl.to(card, { autoAlpha: 1, duration: 1 })
                         .to(
-                            img,
+                            "#header-travel",
                             {
-                                // autoAlpha: 1,
-                                scale: 1.1,
-                                duration: 1.5,
+                                backgroundColor: "transparent",
+                                duration: 0.4,
+                                onStart: () => setHeaderIconicState(false),
+                                onReverseComplete: () =>
+                                    setHeaderIconicState(true),
                             },
                             "<",
                         )
@@ -185,16 +198,6 @@ const cities = [
                             scale: 1.1,
                             duration: 2.5,
                         })
-                        .to(
-                            img,
-                            {
-                                // autoAlpha: 1,
-                                scale: 1.2,
-                                duration: 1.5,
-                            },
-                            "<",
-                        )
-
                         .to(
                             {},
                             {
@@ -245,6 +248,9 @@ const cities = [
                                 autoAlpha: 1,
                                 duration: 0.5,
                                 backgroundColor: "rgba(255, 101, 36, .8)",
+                                onStart: () => setHeaderIconicState(true),
+                                onReverseComplete: () =>
+                                    setHeaderIconicState(false),
 
                                 // color: "#ff6524",
                             })
@@ -286,6 +292,16 @@ const cities = [
                         //     color: "#ff6524",
                         // });
                     }
+
+                    tl.to(
+                        img,
+                        {
+                            scale: 1.04,
+                            duration: index < cityCards.length - 1 ? 5.5 : 5,
+                            ease: "none",
+                        },
+                        cardStart,
+                    );
                 });
             },
         );
