@@ -1,0 +1,291 @@
+---
+import "swiper/css";
+import "swiper/css/navigation";
+import { Icon } from "astro-icon/components";
+
+const imagenes = [
+    {
+        src: "/pexels-apasaric-1510595.jpg",
+        alt: "Paisaje urbano de Japón",
+        review: {
+            text: "La ruta estuvo muy bien pensada. Disfruté Tokio y Kioto sin preocuparme por organizar cada traslado. Japón superó mis expectativas.",
+            reviewer: "Camila Rojas",
+            avatar: "/avatars/uifaces-human-avatar.jpg",
+        },
+    },
+    {
+        src: "/pexels-boris-osaka.jpg",
+        alt: "Vista de Osaka",
+        review: {
+            text: "Me encantó conocer Osaka y probar su comida. La planificación hizo que aprovecháramos el viaje sin sentir que íbamos corriendo.",
+            reviewer: "Diego Martínez",
+            avatar: "/avatars/uifaces-human-avatar (1).jpg",
+        },
+    },
+    {
+        src: "/p-osaka.jpg",
+        alt: "Paisaje de Osaka",
+        review: {
+            text: "Fue una experiencia increíble para viajar en familia. Tuvimos tiempo para descubrir cada lugar a nuestro ritmo.",
+            reviewer: "Valentina Flores",
+            avatar: "/avatars/uifaces-human-avatar (5).jpg",
+        },
+    },
+    {
+        src: "/p-japon.jpg",
+        alt: "Paisaje de Japón",
+        review: {
+            text: "Tokio fue fascinante y Kioto muy tranquilo. Con el viaje organizado pudimos enfocarnos en disfrutar.",
+            reviewer: "Santiago Cruz",
+            avatar: "/avatars/uifaces-human-avatar (7).jpg",
+        },
+    },
+    {
+        src: "/kio-japon.jpg",
+        alt: "Paisaje de Kioto",
+        review: {
+            text: "Japón era un sueño pendiente y el viaje fue cómodo de principio a fin. Me llevo recuerdos hermosos de su cultura y paisajes.",
+            reviewer: "Lucía Herrera",
+            avatar: "/avatars/uifaces-human-avatar (8).jpg",
+        },
+    },
+];
+
+// Duplicamos para que el modo loop tenga suficientes slides
+const imagenesLoop = [...imagenes];
+const carruseles = [{ id: "gallery-swiper", reverse: false }];
+---
+
+<section class="py-20 px-10 text-black">
+    <div class="flex justify-center text-(--color-primary)" aria-hidden="true">
+        <Icon name="comentarios-icon" size={88} />
+    </div>
+    <h2
+        class="text-[2em] pt-7 text-black text-center font-bold font-protest-strike leading-12 tracking-[.04em] uppercase pb-12 lg:text-6xl lg:leading-16"
+    >
+        Lo que dicen nuestros
+        <span class="text-(--color-primary) font-protest-strike">
+            viajeros de nosotros</span
+        >
+    </h2>
+    {
+        carruseles.map((carrusel) => (
+            <div
+                class="swiper gallery-carousel relative mx-auto px-4"
+                id={carrusel.id}
+            >
+                <div class="swiper-wrapper">
+                    {imagenesLoop.map((img) => (
+                        <article
+                            class="swiper-slide review-slide"
+                            tabindex="0"
+                            aria-label={`Reseña de ${img.review.reviewer}`}
+                        >
+                            <img
+                                src={img.src}
+                                alt={img.alt}
+                                class="review-image"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <div class="review-overlay">
+                                <div
+                                    class="flex text-amber-400 -mb-4"
+                                    role="img"
+                                    aria-label="5 estrellas"
+                                >
+                                    <Icon name="star" size={20} />
+                                    <Icon name="star" size={20} />
+                                    <Icon name="star" size={20} />
+                                    <Icon name="star" size={20} />
+                                    <Icon name="star" size={20} />
+                                </div>
+                                <blockquote>{img.review.text}</blockquote>
+                                <div class="review-author">
+                                    {img.review.avatar ? (
+                                        <img
+                                            class="review-avatar"
+                                            src={img.review.avatar}
+                                            alt={`Foto de ${img.review.reviewer}`}
+                                            loading="lazy"
+                                            decoding="async"
+                                        />
+                                    ) : (
+                                        <span
+                                            class="review-avatar-fallback"
+                                            aria-hidden="true"
+                                        >
+                                            {img.review.reviewer.charAt(0)}
+                                        </span>
+                                    )}
+                                    <span>{img.review.reviewer}</span>
+                                </div>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+
+                <div class="swiper-button-prev" />
+                <div class="swiper-button-next" />
+            </div>
+        ))
+    }
+</section>
+
+<style>
+    .gallery-carousel {
+        width: 100%;
+        /* padding-bottom: 20px; */
+        /* -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 5%,
+            black 95%,
+            transparent 100%
+        ); */
+        /* mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 5%,
+            black 95%,
+            transparent 100%
+        ); */
+    }
+
+    .gallery-carousel + .gallery-carousel {
+        margin-top: 1.5rem;
+    }
+
+    .review-slide {
+        position: relative;
+        isolation: isolate;
+        width: 20rem;
+        height: 16rem;
+        overflow: hidden;
+        border-radius: 0.75rem;
+        /* box-shadow: 0 10px 28px rgb(0 0 0 / 20%); */
+        outline: none;
+    }
+
+    .review-slide:focus-visible {
+        outline: 3px solid #ff6524;
+        outline-offset: 3px;
+    }
+
+    .review-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 500ms ease;
+    }
+
+    .review-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 1rem;
+        padding: 1.25rem;
+        color: #fff;
+        background: rgb(14 20 24 / 80%);
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .review-slide:hover .review-image,
+    .review-slide:focus-visible .review-image {
+        transform: scale(1.06);
+    }
+
+    .review-overlay blockquote {
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .review-disclaimer {
+        align-self: flex-start;
+        border-radius: 999px;
+        background: #ff6524;
+        padding: 0.25rem 0.6rem;
+        color: #fff;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .review-author {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    .review-avatar,
+    .review-avatar-fallback {
+        display: grid;
+        width: 2.75rem;
+        height: 2.75rem;
+        flex: 0 0 2.75rem;
+        place-items: center;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .review-avatar-fallback {
+        background: #ff6524;
+        color: #fff;
+        font-size: 1.1rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .review-image,
+        .review-overlay {
+            transition: none;
+        }
+    }
+
+    .gallery-carousel :global(.swiper-wrapper) {
+        transition-timing-function: linear !important;
+    }
+
+    .gallery-carousel :global(.swiper-button-next),
+    .gallery-carousel :global(.swiper-button-prev) {
+        color: #fff;
+    }
+</style>
+
+<script>
+    // Cada slider necesita un selector propio para limitar la navegación a esta galería.
+    import Swiper from "swiper";
+    import { Navigation, Autoplay } from "swiper/modules";
+
+    const createGalleryCarousel = (selector: string, reverse = false) =>
+        new Swiper(selector, {
+            modules: [Navigation, Autoplay],
+            loop: true,
+            speed: 15000,
+            slidesPerView: "auto",
+            spaceBetween: 20,
+            // navigation: {
+            //     nextEl: `${selector} .swiper-button-next`,
+            //     prevEl: `${selector} .swiper-button-prev`,
+            // },
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+                reverseDirection: reverse,
+            },
+            breakpoints: {
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 30 },
+            },
+        });
+
+    createGalleryCarousel("#gallery-swiper");
+    createGalleryCarousel("#gallery-swiper-reverse", true);
+</script>

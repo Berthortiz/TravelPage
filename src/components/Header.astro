@@ -14,27 +14,39 @@ const links = [
 ];
 ---
 
-<header class="fixed w-full z-50 bg-amber-950/70">
+<header
+    id="header-travel"
+    class="invisibility-gsap-autoAlpha flex fixed w-full z-1050 bg-amber-950/0 items-center"
+>
     <div
-        class="flex lg:max-w-7xl justify-between mx-auto px-6 py-6 md:w-full items-center"
+        id="header-pc"
+        class="flex lg:max-w-7xl w-full justify-between mx-auto px-6 py-0 md:w-full md:items-center"
     >
-        <div>
-            <a href="/" class="font-bold">
-                <img class="w-10" src={logo} alt="logo" />
+        <div class="flex items-center">
+            <a href="/" class="relative block w-10 aspect-[55/49] font-bold">
+                <img
+                    class="header-logo-default absolute inset-0 w-full h-full object-contain"
+                    src={logo}
+                    alt="logo"
+                />
+                <img
+                    class="header-logo-white absolute inset-0 w-full h-full object-contain opacity-0 invisible"
+                    src="/logo-travel-white.svg"
+                    alt=""
+                    aria-hidden="true"
+                />
             </a>
         </div>
 
         <nav
-            class="hidden md:flex gap-6 items-center text-blue-50"
+            id="label-links"
+            class="hidden md:flex gap-6 items-center"
             role="navigation"
             aria-label="Principal"
         >
             {
                 links.map((link) => (
-                    <a
-                        class="text-[1.1em] hover:text-white transition-colors"
-                        href={link.href}
-                    >
+                    <a class="text-nav-custom text-[1.1em]" href={link.href}>
                         {link.label}
                     </a>
                 ))
@@ -44,7 +56,8 @@ const links = [
         <ButtonPrimary
             title="Contacto"
             link="https://wa.link/bqgy6d"
-            additionalClass="hidden md:block px-4 py-1 text-(--color-secundary)"
+            additionalClass="hidden md:block px-4 py-1 text-white "
+            bg="var(--color-primary)"
         />
 
         <button
@@ -79,8 +92,18 @@ const links = [
         aria-label="Menú móvil"
     >
         <div class="flex justify-between items-center w-full">
-            <a href="/" class="font-bold">
-                <img class="w-10" src={logo} alt="logo" />
+            <a href="/" class="relative block w-10 aspect-[55/49] font-bold">
+                <img
+                    class="header-logo-default absolute inset-0 w-full h-full object-contain"
+                    src={logo}
+                    alt="logo"
+                />
+                <img
+                    class="header-logo-white absolute inset-0 w-full h-full object-contain opacity-0 invisible"
+                    src="/logo-travel-white.svg"
+                    alt=""
+                    aria-hidden="true"
+                />
             </a>
 
             <button
@@ -270,6 +293,10 @@ const links = [
             overflow: hidden;
             padding-right: var(--scrollbar-width);
         }
+
+        .text-nav-custom {
+            color: #ffffff;
+        }
         #mobile-menu {
             transform: translateX(-100%);
             transition: all 0.4s ease-out;
@@ -278,5 +305,73 @@ const links = [
             transform: translateX(0) !important;
             overflow: visible;
         }
+        #header-travel {
+            height: 80px;
+        }
+        #travel-pc {
+        }
     </style>
+    <script>
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        function animateHeader() {
+            const tl = gsap.timeline({
+                duration: 1,
+            });
+
+            tl.fromTo(
+                "#header-travel",
+                { autoAlpha: 0 },
+                { autoAlpha: 1, duration: 1 },
+            );
+
+            const tlHeader = gsap.timeline({
+                ease: "power1.out",
+                // ease: "back.out(1.7)",
+                scrollTrigger: {
+                    trigger: "#priceTravel",
+                    markers: true,
+
+                    scrub: 1,
+                    // pin: true,
+
+                    // start: "top top",
+                    start: "top-=160 top",
+                    // end: "+=4500",
+                },
+            });
+
+            tlHeader.to("#header-travel", {
+                // x: 100,
+                backgroundColor: "#ffffff05",
+
+                backdropFilter: "blur(10px)",
+                webkitBackdropFilter: "blur(10px)",
+                duration: 0.5,
+                height: 70,
+                padding: 0,
+            });
+
+            ScrollTrigger.create({
+                trigger: "#seccionIconicCities",
+                markers: true,
+                start: "top top",
+                onEnter: () =>
+                    gsap.set(".text-nav-custom", { color: "#ff6524" }),
+                onLeaveBack: () =>
+                    gsap.set(".text-nav-custom", { color: "#ffffff" }),
+            });
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", animateHeader, {
+                once: true,
+            });
+        } else {
+            animateHeader();
+        }
+    </script>
 </header>

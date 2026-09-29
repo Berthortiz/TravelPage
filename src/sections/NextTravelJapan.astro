@@ -1,0 +1,211 @@
+---
+import { Icon } from "astro-icon/components";
+import LogoTravel from "../icons/LogoTravel.svg";
+import Picture from "astro/components/Picture.astro";
+import ButtonReserve from "../components/ButtonReserve.astro";
+
+const citiestravel = [
+    {
+        cityName: "Osaka",
+        image: "/pexels-apasaric-1510595.jpg",
+        description:
+            "Una ciudad vibrante, famosa por su gastronomía y vida nocturna.",
+        date: "20/10/26",
+        days: 7,
+        price: 1899,
+    },
+    {
+        cityName: "Kyoto",
+        image: "/kio-japon.jpg",
+        description: "Una ciudad histórica llena de templos y tradiciones.",
+        date: "28/10/26",
+        days: 5,
+        price: 1599,
+    },
+    {
+        cityName: "Hokkaido",
+        image: "/h2-japn.jpg",
+        description: "Un destino tranquilo rodeado de naturaleza y montañas.",
+        date: "05/11/26",
+        days: 8,
+        price: 2199,
+    },
+];
+
+const formatPrice = (val: any) => {
+    return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+    }).format(Number(val) || 0);
+};
+---
+
+<section
+    id="proyects"
+    class="lg:max-w-7xl mx-auto flex flex-col justify-center items-center text-white px-6 py-18 lg:pt-16"
+>
+    <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+    <!--?xml version="1.0" standalone="no"?-->
+    <LogoTravel width={88} height={88} aria-label="Logo de viajes" />
+
+    <h2
+        class="text-[2.5em] pt-7 text-black text-center font-bold font-protest-strike leading-12 tracking-[.04em] uppercase pb-4 lg:text-6xl lg:leading-16"
+    >
+        Próximos
+        <span class="text-(--color-primary) font-protest-strike">
+            Viajes Disponibles para Septiembre</span
+        >
+    </h2>
+    <p
+        class="md:w-[76ch] text-[1.2em] text-gray-400 pb-16 self-center text-center"
+    >
+        Explora nuestro catálogo de salidas disponibles para septiembre, reserva
+        tu lugar a tiempo y viaja con total comodidad hacia tu próximo destino.
+    </p>
+
+    <article class="grid-projects">
+        {
+            citiestravel.map((item) => (
+                <section class="flex flex-col lg:w-full lg:gap-1 border border-zinc-500/50 ">
+                    <div class="w-full relative flex justify-start ">
+                        <span class=" star absolute w-fit flex px-5 py-2 m-4 rounded-4xl bg-white/10 ">
+                            <Icon
+                                class="text-amber-300  "
+                                name="star"
+                                size={20}
+                            />
+                            5.0
+                        </span>
+                        <Picture
+                            id="pictureCitis"
+                            src={item.image}
+                            alt="testimonial"
+                            width={50}
+                            height={50}
+                            formats={["webp"]}
+                            quality={80}
+                            loading="lazy"
+                            decoding="async"
+                            class="w-full object-contain overflow-hidden h-fit "
+                        />
+                        {
+                            // galeria de imagenes slider en version movil, y pc
+                        }
+                    </div>
+
+                    <div class="w-full text-left flex text-black flex-col justify-center gap-2  lg:px-5 lg:pt-5 p-5">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-2xl flex  font-bold text-black lg:text-2xl">
+                                {item.cityName}
+                                <Icon
+                                    name="icon-pointer"
+                                    class="mt-1 text-(--color-primary)"
+                                />
+                            </h2>
+
+                            <span class="flex justify-between items-center font-semibold text-[1.2em]">
+                                {item.days} Días
+                                <Icon
+                                    name="backpack"
+                                    class="text-(--color-primary) "
+                                    size={20}
+                                />
+                            </span>
+                        </div>
+                        <p class="text-[1em] text-gray-400 pb-2">
+                            {item.description}
+                        </p>
+                        <div class="w-full flex justify-between">
+                            <div class="flex flex-col text-gray-400 pb-2">
+                                <span> 12 sin intereses</span>
+                                <span class="font-bold text-[1.4em] text-black">
+                                    {formatPrice(item.price)} USD
+                                </span>
+                                <span> x Persona</span>
+                            </div>
+                            <div class="text-white flex items-center">
+                                <ButtonReserve
+                                    label="Reserva"
+                                    class="font-light"
+                                />
+                            </div>
+                        </div>
+                        {/* <h3 class="font-bold">{item.sub_title}</h3> */}
+                    </div>
+                </section>
+            ))
+        }
+    </article>
+
+    <style>
+        .star {
+            backdrop-filter: blur(6px) saturate(1.2);
+        }
+        #pictureCitis {
+            border-radius: 10px 10px 0 0;
+        }
+        .btn-project:first-child {
+            background-color: var(--color-brand);
+        }
+
+        .btn-project:nth-child(2) {
+            padding: 0;
+            border-radius: 0;
+            line-height: 2;
+        }
+
+        .btn-project:nth-child(2):hover {
+            box-shadow: 0 1px 0 0 rgb(255, 255, 255);
+        }
+
+        .gradiente-title {
+            --color-gradient: #03cff3;
+            background-image: linear-gradient(
+                to right,
+                #0475ff,
+                var(--color-gradient)
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradiente-title {
+            color: #0090f7;
+            /* fallback */
+        }
+
+        .grid-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3em;
+
+            & section {
+                /* border: 1px solid var(--color-text-primary); */
+                /* padding: 1.4em; */
+                border-radius: 14px;
+                background-color:;
+            }
+        }
+
+        /* Celulares grandes / Tablets (sm: 640px) */
+        @media (width >= 640px) {
+        }
+
+        /* Tablets en horizontal (md: 768px) */
+        @media (width >= 768px) {
+        }
+
+        /* Laptops / Pantallas de escritorio (lg: 1024px) */
+        @media (width >= 1024px) {
+        }
+
+        /* Escritorios grandes (xl: 1280px) */
+        @media (width >= 1280px) {
+        }
+
+        /* Pantallas gigantes / Monitores (2xl: 1536px) */
+        @media (width >= 1536px) {
+        }
+    </style>
+</section>

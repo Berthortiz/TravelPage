@@ -29,7 +29,7 @@ body {
     --font-weight-black: 900;
 
     /* Colors */
-    --color-primary: #FF6524;
+    /* --color-primary: #FF6524; */
     --color-primary-variant-2: #FF4C35;
     --color-paragraph: #646464;
     --gradient-primary: linear-gradient(to left, var(--color-primary), var(--color-primary-variant-2));

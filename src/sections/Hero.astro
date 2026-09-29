@@ -2,50 +2,63 @@
 import ButtonReserve from "../components/ButtonReserve.astro";
 import IconPoint from "/public/icon-point.svg";
 import IconAir from "../assets//icons/icon-air.svg";
+import { Icon } from "astro-icon/components";
 ---
 
 <main
     id="hero"
-    class="px-2 text-white bg-no-repeat bg-cover bg-center h-screen w-full"
+    class="px-2 relative text-white bg-no-repeat bg-cover bg-center h-screen w-full"
 >
+    <div class="hero-overlay absolute bg-black opacity-50 inset-0 z-0"></div>
     <div
+        id="hero-content"
         class="max-w-7xl h-full mx-auto flex flex-col justify-center items-center gap-2"
     >
-        <div class="flex font-extralight gap-4 text-[1em]">
-            <div class="flex">
-                <IconPoint />
-                <span>Osaka</span>
+        <div
+            id="priceTravel"
+            class="pb-5 z-10 flex font-extralight gap-4 text-[1em]"
+        >
+            <div class="flex items-center gap-2">
+                <Icon name="icon-money" size={30} />
+                <span class="font-medium">$2,999 USD</span>
             </div>
-            <div class="flex">
-                <IconPoint />
-                <span>13 May 2026</span>
+            <div class="flex items-center gap-1.1">
+                <Icon name="icon-pointer" size={30} />
+                <span class="font-medium">Osaka</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <Icon name="icon-calendar" size={30} />
+
+                <span class="font-medium">13/12/27</span>
             </div>
         </div>
         <h1
-            class="text-[2.9em] pt-2 text-center leading-13 sm:text-7xl sm:leading-15 md:text-8xl montserrat-italic-black"
+            id="Travel-title-hero"
+            class="scale-[.8] text-[2.9em] pt-2 text-center leading-13 sm:text-7xl sm:leading-15 md:text-8xl montserrat-italic-black"
         >
             Viaja a Japón
         </h1>
         <p
-            class="text-center text-[1em] p-2 font-light md:max-w-[75ch] sm:max-w-[55ch] sm:pt-5 md:pt-8"
+            id="hero-description-travel"
+            class="z-10 text-center text-[1em] p-2 font-light md:max-w-[75ch] sm:max-w-[55ch] sm:pt-5 md:pt-8"
         >
             Organiza tu viaje a Japón con expertos en turismo japonés. Ofrecemos
             paquetes personalizados, rutas temáticas, asistencia en español y
             recursos exclusivos para que tu experiencia sea inolvidable.
         </p>
-        <ButtonReserve label="Reserva Ahora" />
+        <ButtonReserve label="Reserva Ahora" class="btn-reserve z-10" />
     </div>
 </main>
 <!-- bg-[url('/public/bg-japan.png')] -->
 
 <style>
     #hero {
-        background: linear-gradient(
+        background:
+            /* linear-gradient(
                 to right,
                 rgba(0, 0, 0, 0.623),
                 rgba(0, 0, 0, 0.623)
-            ),
-            url("/public/bg-japan.png");
+            ), */ url("/bg-japan.png");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -67,3 +80,49 @@ import IconAir from "../assets//icons/icon-air.svg";
         font-style: italic;
     }
 </style>
+
+<script>
+    import { gsap } from "gsap";
+
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+    console.log(gsap.version);
+
+    function animateHero() {
+        const $titleHero = document.getElementById("Travel-title-hero");
+        const tl = gsap.timeline({
+            ease: "back.out()",
+        });
+        tl.fromTo(
+            $titleHero,
+            { autoAlpha: 0, scale: 0.8 },
+            {
+                duration: 0.7,
+                autoAlpha: 1,
+                scale: 1,
+                delay: 0.4,
+            },
+        )
+            .fromTo(
+                "#hero-description-travel, .btn-reserve, #priceTravel",
+                { autoAlpha: 0 },
+                { autoAlpha: 1, duration: 0.6, stagger: 0.15 },
+            )
+            .to(".hero-overlay", { opacity: 0.5 }, 0.1);
+    }
+
+    // .to("#hero-description-travel", {
+    //         duration: 1,
+    //         autoAlpha: 1,
+    //     }, "-=0.5");
+    // }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", animateHero, {
+            once: true,
+        });
+    } else {
+        animateHero();
+    }
+</script>

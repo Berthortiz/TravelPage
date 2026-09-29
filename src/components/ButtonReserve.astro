@@ -1,15 +1,19 @@
 ---
 interface Props {
     label: string;
+    class?: string;
     // icon?: any;
 }
 
-const { label } = Astro.props;
+const { label, class: className = "" } = Astro.props;
 import IconAir from "../assets/icons/icon-air.svg";
 ---
 
 <a
-    class="buttonReserve px-6 py-3 rounded-4xl flex items-center gap-2 font-bold"
+    class:list={[
+        "buttonReserve px-6 py-3 rounded-4xl flex items-center gap-2 font-bold",
+        className,
+    ]}
     href="#"
 >
     <IconAir />

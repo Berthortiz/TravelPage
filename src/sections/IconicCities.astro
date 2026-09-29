@@ -2,64 +2,149 @@
 import Img1 from "../assets/sec-2-img1.png";
 import ButtonWhatsapp from "../components/ButtonWhatsapp.astro";
 import IconPhone from "../assets/icons/iconPhone.svg";
+import ButtonReserve from "../components/ButtonReserve.astro";
+import ButtonPrimary from "../components/ButtonPrimary.astro";
+import IconicCitis from "../components/IconicCitis.astro";
 ---
 
 <section
-    class="lg:max-w-7xl mx-auto px-5 py-20 flex flex-col gap-10 lg:flex-row-reverse"
+    id="seccionIconicCities"
+    class="mask-japan overflow-hidden relative lg:w-full h-screen mx-auto py-20 flex flex-col gap-10 lg:justify-center"
 >
-    <div class="[&_p]:text-[1.2em] text-center lg:w-1/2 lg:text-left">
-        <h2
-            class="text-[2.5em] font-bold font-protest-strike leading-12 tracking-[.04em] uppercase pb-4 lg:text-6xl lg:leading-16"
-        >
-            Te llevamos a las Pricipales
-            <span class="text-[var(--color-primary)] font-protest-strike">
-                ciudades icónicas de japón</span
-            >
-        </h2>
-        <p class="text-[var(--color-paragraph)] pb-3">
-            Descubre las ciudades más emblemáticas de Japón: Tokio, moderna y
-            vibrante; Kioto, cuna de templos y tradición; Osaka, capital
-            gastronómica y cultural; Hiroshima, símbolo de paz y resiliencia; y
-            Sapporo, ideal para explorar paisajes del norte.
-        </p>
-        <p class="text-[var(--color-paragraph)] pb-6">
-            Cada destino ofrece experiencias únicas para todo tipo de viajero.
-        </p>
-        <div class="flex">
-            <ButtonWhatsapp
-                label="Reserva Ahora"
-                href="https://web.whatsapp.com/"
-            />
-            <a
-                class="buttonReserve px-6 py-3 rounded-4xl flex items-center gap-2 text-[var(--color-primary)] font-semibold"
-                href="tel:+14076018961"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Llámanos y Reserva un viaje Ahora"
-                aria-label="Abrir ejemplo.com en una nueva pestaña"
-            >
-                <IconPhone /> +1 (407) 601-8961
-            </a>
-        </div>
-    </div>
+    <!-- <div class="mask-japan"></div> -->
     <div
-        class="flex gap-3.5 [&_img]:border-12 [&_img]:object-cover [&_img]:rounded-2xl [&_img]:border-[var(--color-primary)] lg:w-1/2 lg:flex-row-reverse lg:gap-5"
+        class="lg:max-w-7xl m-auto px-5 flex justify-center lg:flex-row flex-col"
     >
-        <div class="w-[55%] flex items-center">
-            <img
-                class="lg:h-[85%]"
-                src="/sec-2-img3.png"
-                alt="Foto de Osaka, japon."
-            />
+        <div
+            class="col-2 relative flex-col [&_p]:text-[1.2em] text-center lg:w-1/2 lg:text-left"
+        >
+            <h2
+                data-animate="1.5"
+                class="visible opacity-100 text-[1.9em] leading-8 pt-20 lg:text-[3.5em] font-bold font-protest-strike tracking-[.04em] uppercase pb-4 lg:text-6xl lg:leading-16"
+            >
+                Te llevamos a las Pricipales
+                <span class="text-[var(--color-primary)] font-protest-strike">
+                    ciudades icónicas de japón</span
+                >
+            </h2>
+
+            <p data-animate="1" class="text-[var(--color-paragraph)] pb-3">
+                Descubre las ciudades más emblemáticas de Japón: Tokio, moderna
+                y vibrante; Kioto, cuna de templos y tradición; Osaka, capital
+                gastronómica y cultural; Hiroshima, símbolo de paz y
+                resiliencia; y Sapporo, ideal para explorar paisajes del norte.
+            </p>
+            <p data-animate="1" class="text-[var(--color-paragraph)] pb-6">
+                Cada destino ofrece experiencias únicas para todo tipo de
+                viajero.
+            </p>
+            <div data-animate="1" class="flex">
+                <ButtonWhatsapp
+                    label="Reserva Ahora"
+                    href="https://web.whatsapp.com/"
+                />
+                <a
+                    class="buttonReserve px-6 py-3 rounded-4xl flex items-center gap-2 text-[var(--color-primary)] font-semibold"
+                    href="tel:+14076018961"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Llámanos y Reserva un viaje Ahora"
+                    aria-label="Abrir ejemplo.com en una nueva pestaña"
+                >
+                    <IconPhone /> +1 (407) 601-8961
+                </a>
+            </div>
         </div>
-        <div class="iconsCitys w-[45%] flex flex-col gap-4 lg:gap-5">
-            <img class="h-1/2" src={Img1.src} alt="foto de Kioto, Japón." />
-            <img
-                class="h-1/2"
-                src="/sec-2-img2.png"
-                alt="Foto de Tokyo, japon."
-            />
+        <div
+            data-animate="1.6"
+            class="flex gap-3.5 [&_img]:border-12 [&_img]:object-cover [&_img]:rounded-2xl [&_img]:border-[var(--color-primary)] lg:w-1/2 lg:flex-row-reverse lg:px-10 pt-0 pb-10 lg:gap-5"
+        >
+            <div class="w-[55%] flex items-center">
+                <img
+                    class="lg:h-[85%]"
+                    src="/p-osaka.jpg"
+                    alt="Foto de Osaka, japon."
+                />
+            </div>
+            <div class="iconsCitys w-[45%] flex flex-col gap-4 lg:gap-5">
+                <img class="h-1/2" src={Img1.src} alt="foto de Kioto, Japón." />
+                <img
+                    class="h-1/2"
+                    src="/sec-2-img2.png"
+                    alt="Foto de Tokyo, japon."
+                />
+            </div>
         </div>
+
+        <IconicCitis />
     </div>
+    <div class=""></div>
 </section>
-<style></style>
+
+<style>
+    @media (max-width: 1023px) {
+        [data-animate="1.6"] {
+            transform: translateX(100%);
+        }
+    }
+    .mask-japan {
+        mask-image: url("/noto_shinto-shrine.svg");
+        mask-repeat: no-repeat;
+        mask-position: 50% 30%;
+        /* mask-position: center bottom; */
+        mask-size: clamp(4800vh, 100%, 0vh);
+
+        background-color: rgba(255, 101, 36, 0);
+        /* position: absolute; */
+        /* inset: 0; */
+        /* bottom: 0; */
+        /* left: 0; */
+        /* right: 0; */
+
+        z-index: 1000;
+    }
+    #iconic-pictures img {
+        width: 100%;
+        height: 100%;
+    }
+    [data-animate="1.5"] {
+        /* text-shadow: 4px 4px 0px transparent; */
+        /* text-shadow:
+            4px 4px 0px #000000,
+            0 0 10px #ff400083,
+            0 0 20px #ff370050; */
+    }
+    .col-2 {
+        /* background-color: rgba(250, 250, 250, 0);
+        backdrop-filter: blur(5px) saturate(1);
+        border-radius: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.253); */
+        /* box-shadow: 4px 4px 20px 10px #ffffff4e; */
+    }
+
+    .labelCitis p {
+        margin: -10px -50px 0 0;
+        text-shadow: 1px 1px 2px #000000;
+    }
+    .labelCitis {
+        /* transform: translateY(100%); */
+        color: #fff;
+
+        text-shadow:
+            /* 4px 4px 0px #fff, */
+            4px 4px 0px black,
+            4px 4px 10px #ffffffc0;
+        text-shadow:;
+        /* text-shadow:
+            4px 4px 0px #000000,
+            0 0 10px #ff400083,
+            0 0 20px #ff370050; */
+    }
+
+    .blur-box {
+        background-color: rgba(250, 250, 250, 0);
+        backdrop-filter: blur(6px) saturate(1.2);
+        border-radius: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.253);
+    }
+</style>
